@@ -1,0 +1,284 @@
+﻿<Window x:Class="MusicCompilerUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MusicCompilerUI"
+        mc:Ignorable="d"
+        Title="🎵 Music Compiler Studio" 
+        Height="700" 
+        Width="1000"
+        WindowStartupLocation="CenterScreen"
+        Background="#1E1E1E"
+        FontFamily="Segoe UI">
+
+    <Window.Resources>
+        <!-- Modern Color Palette -->
+        <SolidColorBrush x:Key="BackgroundDark" Color="#1E1E1E"/>
+        <SolidColorBrush x:Key="BackgroundMedium" Color="#2D2D30"/>
+        <SolidColorBrush x:Key="AccentBlue" Color="#007ACC"/>
+        <SolidColorBrush x:Key="AccentGreen" Color="#6A9955"/>
+        <SolidColorBrush x:Key="TextLight" Color="#CCCCCC"/>
+        <SolidColorBrush x:Key="TextBright" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="BorderColor" Color="#3F3F46"/>
+
+        <!-- Button Styles -->
+        <Style x:Key="ModernButton" TargetType="Button">
+            <Setter Property="Background" Value="#2D2D30"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#3F3F46"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Margin="12,8"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#3E3E42"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#007ACC"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- TextBox Style -->
+        <Style x:Key="ModernTextBox" TargetType="TextBox">
+            <Setter Property="Background" Value="#1E1E1E"/>
+            <Setter Property="Foreground" Value="#D4D4D4"/>
+            <Setter Property="BorderBrush" Value="#3F3F46"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="8"/>
+        </Style>
+    </Window.Resources>
+
+    <!-- Main Grid with Margin -->
+    <Grid Margin="15" Background="{StaticResource BackgroundDark}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="150"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header with Title and Status -->
+        <Border Grid.Row="0"
+                Background="{StaticResource BackgroundMedium}"
+                BorderBrush="{StaticResource BorderColor}"
+                BorderThickness="1"
+                CornerRadius="6"
+                Margin="0,0,0,15"
+                Padding="15">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Title with Music Icon -->
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <TextBlock Text="🎵" FontSize="28" Margin="0,0,10,0"/>
+                    <StackPanel>
+                        <TextBlock Text="Music Compiler Studio" 
+                                   FontSize="20" 
+                                   FontWeight="Bold" 
+                                   Foreground="{StaticResource TextBright}"/>
+                        <TextBlock Text="Write your music code, compile, and play!" 
+                                   FontSize="12" 
+                                   Foreground="#999999"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Status Indicator -->
+                <Border Grid.Column="2"
+                        Background="#2A2A2A"
+                        CornerRadius="12"
+                        Padding="12,4">
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse Width="10" Height="10" Fill="#55FF55" Margin="0,0,8,0"/>
+                        <TextBlock Text="Ready" Foreground="#55FF55" FontWeight="SemiBold"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+
+        <!-- Code Editor with Line Numbers (Enhanced) -->
+        <Grid Grid.Row="1" Margin="0,0,0,15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Line Numbers -->
+            <Border Grid.Column="0"
+                    Background="#2D2D30"
+                    BorderBrush="{StaticResource BorderColor}"
+                    BorderThickness="1,1,0,1"
+                    CornerRadius="6,0,0,6">
+                <TextBlock x:Name="LineNumbers"
+                           FontFamily="Consolas"
+                           FontSize="14"
+                           Foreground="#858585"
+                           Padding="8,10,0,0"
+                           Text="1&#x0a;2&#x0a;3&#x0a;4&#x0a;5&#x0a;6&#x0a;7&#x0a;8&#x0a;9&#x0a;10"/>
+            </Border>
+
+            <!-- Code Editor -->
+            <Border Grid.Column="1"
+                    Background="{StaticResource BackgroundMedium}"
+                    BorderBrush="{StaticResource BorderColor}"
+                    BorderThickness="0,1,1,1"
+                    CornerRadius="0,6,6,0">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <TextBox x:Name="CodeEditor"
+                             Style="{StaticResource ModernTextBox}"
+                             Background="Transparent"
+                             BorderThickness="0"
+                             AcceptsReturn="True"
+                             TextWrapping="NoWrap"
+                             Padding="10,10,10,10"
+                             VerticalAlignment="Stretch"
+                             TextChanged="CodeEditor_TextChanged">
+                        <TextBox.Resources>
+                            <Style TargetType="TextBox">
+                                <Setter Property="Foreground" Value="#D4D4D4"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+
+        <!-- Toolbar with Buttons -->
+        <Border Grid.Row="2"
+                Background="{StaticResource BackgroundMedium}"
+                BorderBrush="{StaticResource BorderColor}"
+                BorderThickness="1"
+                CornerRadius="6"
+                Margin="0,0,0,15"
+                Padding="15">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Sample Template Button -->
+                <Button Grid.Column="1"
+                        Style="{StaticResource ModernButton}"
+                        Margin="0,0,10,0"
+                        Click="LoadSample_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="📄" FontSize="16" Margin="0,0,8,0"/>
+                        <TextBlock Text="Load Sample"/>
+                    </StackPanel>
+                </Button>
+
+                <!-- Compile Button -->
+                <Button Grid.Column="2"
+                        Style="{StaticResource ModernButton}"
+                        Background="#007ACC"
+                        Margin="0,0,10,0"
+                        Click="CompileButton_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="⚙️" FontSize="16" Margin="0,0,8,0"/>
+                        <TextBlock Text="Compile"/>
+                    </StackPanel>
+                </Button>
+
+                <!-- Clear Button -->
+                <Button Grid.Column="3"
+                        Style="{StaticResource ModernButton}"
+                        Margin="0,0,10,0"
+                        Click="ClearButton_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="🗑️" FontSize="16" Margin="0,0,8,0"/>
+                        <TextBlock Text="Clear"/>
+                    </StackPanel>
+                </Button>
+
+                <!-- Play MIDI Button -->
+                <Button Grid.Column="4"
+                        Style="{StaticResource ModernButton}"
+                        Background="#6A9955"
+                        Click="PlayButton_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="▶️" FontSize="16" Margin="0,0,8,0"/>
+                        <TextBlock Text="Play MIDI"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </Border>
+
+        <!-- Output Console with Header -->
+        <Border Grid.Row="3"
+                Background="{StaticResource BackgroundMedium}"
+                BorderBrush="{StaticResource BorderColor}"
+                BorderThickness="1"
+                CornerRadius="6">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Console Header -->
+                <Border Grid.Row="0"
+                        Background="#2A2A2A"
+                        BorderBrush="{StaticResource BorderColor}"
+                        BorderThickness="0,0,0,1"
+                        CornerRadius="6,6,0,0"
+                        Padding="15,8">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" 
+                                   Text="📟 Output Console" 
+                                   FontWeight="Bold" 
+                                   Foreground="{StaticResource TextBright}"/>
+                        <TextBlock Grid.Column="1" 
+                                   x:Name="CompileStatus"
+                                   Text="Ready" 
+                                   HorizontalAlignment="Right"
+                                   Foreground="#999999"
+                                   FontSize="11"/>
+                    </Grid>
+                </Border>
+
+                <!-- Console Output -->
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <TextBox x:Name="OutputConsole"
+                             Style="{StaticResource ModernTextBox}"
+                             Background="Transparent"
+                             BorderThickness="0"
+                             IsReadOnly="True"
+                             TextWrapping="Wrap"
+                             Padding="15,10"
+                             FontFamily="Consolas"
+                             FontSize="12"/>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

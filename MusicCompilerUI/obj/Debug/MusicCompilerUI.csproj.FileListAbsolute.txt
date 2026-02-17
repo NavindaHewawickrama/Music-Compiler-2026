@@ -1,0 +1,15 @@
+C:\Users\Owner\source\repos\MusicCompilerUI\MusicCompilerUI\bin\Debug\MusicCompilerUI.exe.config
+C:\Users\Owner\source\repos\MusicCompilerUI\MusicCompilerUI\bin\Debug\MusicCompilerUI.exe
+C:\Users\Owner\source\repos\MusicCompilerUI\MusicCompilerUI\bin\Debug\MusicCompilerUI.pdb
+C:\Users\Owner\source\repos\MusicCompilerUI\MusicCompilerUI\obj\Debug\MusicCompilerUI.csprojAssemblyReference.cache
+C:\Users\Owner\source\repos\MusicCompilerUI\MusicCompilerUI\obj\Debug\MainWindow.g.cs
+C:\Users\Owner\source\repos\MusicCompilerUI\MusicCompilerUI\obj\Debug\App.g.cs
+C:\Users\Owner\source\repos\MusicCompilerUI\MusicCompilerUI\obj\Debug\MusicCompilerUI_MarkupCompile.cache
+C:\Users\Owner\source\repos\MusicCompilerUI\MusicCompilerUI\obj\Debug\MusicCompilerUI_MarkupCompile.lref
+C:\Users\Owner\source\repos\MusicCompilerUI\MusicCompilerUI\obj\Debug\MainWindow.baml
+C:\Users\Owner\source\repos\MusicCompilerUI\MusicCompilerUI\obj\Debug\MusicCompilerUI.g.resources
+C:\Users\Owner\source\repos\MusicCompilerUI\MusicCompilerUI\obj\Debug\MusicCompilerUI.Properties.Resources.resources
+C:\Users\Owner\source\repos\MusicCompilerUI\MusicCompilerUI\obj\Debug\MusicCompilerUI.csproj.GenerateResource.cache
+C:\Users\Owner\source\repos\MusicCompilerUI\MusicCompilerUI\obj\Debug\MusicCompilerUI.csproj.CoreCompileInputs.cache
+C:\Users\Owner\source\repos\MusicCompilerUI\MusicCompilerUI\obj\Debug\MusicCompilerUI.exe
+C:\Users\Owner\source\repos\MusicCompilerUI\MusicCompilerUI\obj\Debug\MusicCompilerUI.pdb
